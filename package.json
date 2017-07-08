@@ -1,0 +1,11 @@
+{
+  "name": "cas-playground",
+  "version": "1.0.0",
+  "description": "Testbed",
+  "main": "index.js",
+  "author": "kow",
+  "license": "MIT",
+  "dependencies": {
+    "twitter": "^1.7.1"
+  }
+}
