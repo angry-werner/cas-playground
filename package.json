@@ -6,6 +6,9 @@
   "author": "kow",
   "license": "MIT",
   "dependencies": {
-    "twitter": "^1.7.1"
+    "pouchdb": "^6.2.0",
+    "twitter": "^1.7.1",
+    "uuid": "^3.1.0",
+    "watson-developer-cloud": "^2.34.0"
   }
 }
