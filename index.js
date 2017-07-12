@@ -5,34 +5,40 @@ const uuidv1 = require('uuid/v1');
 
 const credentials = require('./credentials.json');
 
-var client = new Twitter(credentials.twitter);
+const client = new Twitter(credentials.twitter);
+const tone_analyzer = new ToneAnalyzerV3(credentials.toneAnalyser);
+const farts = new PouchDB('farts');
 
-var stream = client.stream('statuses/filter', {follow: '254595701'});
-stream.on('data', function(event) {
-    console.log(event && event.text);
+const stream = client.stream('statuses/filter', {follow: '254595701'});
+stream.on('data', function (event) {
+    'use strict';
+
+    function analyse(tweet) {
+        'use strict';
+
+        tone_analyzer.tone(tweet, function (err, tone) {
+            if (err) {
+                console.log(err);
+            } else {
+                var toneFromWatson = tone;
+                var id = uuidv1();
+                var item = {
+                    '_id': id,
+                    'message': event,
+                    'sentiment': toneFromWatson
+                }
+
+                farts.put(item);
+                farts.get(id).then(function (document) {
+                    console.log(JSON.stringify(document, null, 2));
+                });
+            }
+        });
+    }
+    analyse({'text': event.text});
 });
 
-stream.on('error', function(error) {
+stream.on('error', function (error) {
     throw error;
 });
-
-var text = 'Greetings from Watson Developer Cloud!';
-console.log('To be analysed: ' + text);
-
-var tone_analyzer = new ToneAnalyzerV3(credentials.toneAnalyser);
-
-tone_analyzer.tone({ text: text},
-    function(err, tone) {
-        if (err)
-            console.log(err);
-        else
-            console.log(JSON.stringify(tone, null, 2));
-    });
-
-var farts = new PouchDB('farts');
-farts.info().then(function (info) {
-    console.log(info);
-})
-
-console.log('UUID: ' + uuidv1());
 
