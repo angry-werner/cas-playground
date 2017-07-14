@@ -26,7 +26,7 @@ stream.on('data', function (event) {
                     '_id': id,
                     'message': event,
                     'sentiment': toneFromWatson
-                }
+                };
 
                 farts.put(item);
                 farts.get(id).then(function (document) {
