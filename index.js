@@ -2,6 +2,7 @@ const Twitter = require('twitter');
 const PouchDB = require('pouchdb');
 const ToneAnalyzerV3 = require('watson-developer-cloud/tone-analyzer/v3');
 const uuidv1 = require('uuid/v1');
+const Rx = require('rxjs');
 
 const credentials = require('./credentials.json');
 
@@ -9,15 +10,22 @@ const client = new Twitter(credentials.twitter);
 const tone_analyzer = new ToneAnalyzerV3(credentials.toneAnalyser);
 const farts = new PouchDB('farts');
 
-const stream = client.stream('statuses/filter', {follow: '254595701'});
-stream.on('data', function (tweet) {
-    'use strict';
-    analyse(tweet);
-});
+const observer = Rx.Subscriber.create(
+    function (tweet) {
+        'use strict';
+        analyse(tweet);
+    },
+    function (error) {
+        'use strict';
+        console.log(error);
+    },
+    function () {
+        'use strict';
+        console.log('Twitter channel closed');
+    });
 
-stream.on('error', function (error) {
-    throw error;
-});
+const stream = Rx.Observable.fromEvent(client.stream('statuses/filter', {follow: '254595701'}), 'data');
+stream.subscribe(observer);
 
 function analyse(tweet) {
     'use strict';
