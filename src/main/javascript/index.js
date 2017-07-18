@@ -3,12 +3,16 @@ const PouchDB = require('pouchdb');
 const ToneAnalyzerV3 = require('watson-developer-cloud/tone-analyzer/v3');
 const uuidv1 = require('uuid/v1');
 const Rx = require('rxjs');
+const TwitterManagement = require('./twitterManagement.js');
 
 const credentials = require('./../../../credentials.json');
 
 const client = new Twitter(credentials.twitter);
 const tone_analyzer = new ToneAnalyzerV3(credentials.toneAnalyser);
 const farts = new PouchDB('farts');
+
+TwitterManagement.initTwitterManagement(farts, uuidv1);
+
 
 const observer = Rx.Subscriber.create(
     function (tweet) {

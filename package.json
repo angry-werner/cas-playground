@@ -6,6 +6,8 @@
   "author": "kow",
   "license": "MIT",
   "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
     "pouchdb": "^6.2.0",
     "rxjs": "^5.4.2",
     "twitter": "^1.7.1",
