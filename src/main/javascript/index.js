@@ -3,13 +3,19 @@ const PouchDB = require('pouchdb');
 const ToneAnalyzerV3 = require('watson-developer-cloud/tone-analyzer/v3');
 const uuidv1 = require('uuid/v1');
 const Rx = require('rxjs');
-const TwitterManagement = require('./twitterManagement.js');
 
+const TwitterManagement = require('./twitterManagement.js');
 const credentials = require('./../../../credentials.json');
 
 const client = new Twitter(credentials.twitter);
 const tone_analyzer = new ToneAnalyzerV3(credentials.toneAnalyser);
+PouchDB.plugin(require('pouchdb-find'));
 const farts = new PouchDB('farts');
+farts.createIndex({
+    index: {
+        fields: ['twitterId']
+    }
+});
 
 TwitterManagement.initTwitterManagement(farts, uuidv1);
 

@@ -1,4 +1,5 @@
 node_modules
 farts
+farts*
 .idea
 credentials.json
