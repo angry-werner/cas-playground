@@ -2,7 +2,7 @@
   "name": "cas-playground",
   "version": "1.0.0",
   "description": "Testbed",
-  "main": "index.js",
+  "main": "src/main/javascript/index.js",
   "author": "kow",
   "license": "MIT",
   "dependencies": {
