@@ -7,6 +7,8 @@ This is a repository holding a toy implementation of the pol|i|t|ycs CAS project
 
 This is just implemented as I went along. Error handling, modularisation etc. were not thought of. Testing was attempted but I found out I had to take a decision, before I could start.
 
+Node is v8.1.4 and linting is done for ES6.
+
 Obviously there is a lot more to do:
 * Using the twitter ids set in the database to configure the push API
 * Write tests
