@@ -5,15 +5,19 @@ This is a repository holding a toy implementation of the pol|i|t|ycs CAS project
 * The result is stored in a CouchDB database
 * There is a possibility to add and remove twitter ids to the database
 
+This is just implemented as I went along. Error handling, modularisation etc. were not thought of. Testing was attempted but I found out I had to take a decision, before I could start.
+
 Obviously there is a lot more to do:
 * Using the twitter ids set in the database to configure the push API
 * Write tests
 * Push this through a CI and deploy it somewhere
 * Generally cleanup the implementation
+* Proper modularisation
 * Proper error handling
 * Consolidation of used asynchronous patterns
 * Use proper Express routing (didn't work for me)
 * Proper interface to be consumed from the GUI
+* Use data wrapper in the responses of exposed the API
 
 Gotchas
 * To install on Windows (or anywhere else), you need the C++ Toolchain installed (leveldown DB backend for the CouchDB)
