@@ -2,7 +2,7 @@
 This is a repository holding a toy implementation of the pol|i|t|ycs CAS projects backend. The current state of affairs is:
 * The twitter push API is implemented and listening for tweets from me
 * The IBM Watson sentiment analyser is implemented
-* The result is stored in CouchDB
+* The result is stored in a CouchDB database
 * There is a possibility to add and remove twitter ids to the database
 
 Obviously there is a lot more to do:
@@ -21,6 +21,6 @@ Gotchas
 * The twitter API uses a numerical id to follow
 
 APIs
-* Add a twitter ID: post {"twitterId": 1} in the body at http://localhost:3000/twitterers
+* Add a twitter id: post {"twitterId": 1} in the body at http://localhost:3000/twitterers
 * Get the configured twitter ids: get http://localhost:3000/twitterers
-* Get or Delete an entry with the given twitter id: get or delete http://localhost:3000/twitterers&key=theTwitterId
+* Get or delete an entry with the given twitter id: get or delete http://localhost:3000/twitterers&key=theTwitterId
