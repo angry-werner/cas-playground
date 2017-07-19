@@ -22,5 +22,6 @@ Gotchas
 
 APIs
 * Add a twitter id: post {"twitterId": 1} in the body at http://localhost:3000/twitterers
-* Get the configured twitter ids: get http://localhost:3000/twitterers
+* Get or delete the configured twitter ids: get or delete http://localhost:3000/twitterers
 * Get or delete an entry with the given twitter id: get or delete http://localhost:3000/twitterers&key=theTwitterId
+Some request examples for postman are checked in as Twitter App.postman_collection.json.
