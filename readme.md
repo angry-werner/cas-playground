@@ -19,7 +19,7 @@ Obviously there is a lot more to do:
 * Consolidation of used asynchronous patterns
 * Use proper Express routing (didn't work for me)
 * Proper interface to be consumed from the GUI
-* Use data wrapper in the responses of exposed the API
+* Use data wrapper in the responses of the exposed API
 
 Gotchas
 * To install on Windows (or anywhere else), you need the C++ Toolchain installed (leveldown DB backend for the CouchDB)
