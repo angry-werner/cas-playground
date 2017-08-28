@@ -3,12 +3,16 @@ const PouchDB = require('pouchdb');
 const ToneAnalyzerV3 = require('watson-developer-cloud/tone-analyzer/v3');
 const uuidv1 = require('uuid/v1');
 const Rx = require('rxjs');
+const Ws = require('ws');
 
 const TwitterManagement = require('./twitterManagement.js');
 const credentials = require('./../../../credentials.json');
 
 const client = new Twitter(credentials.twitter);
 const tone_analyzer = new ToneAnalyzerV3(credentials.toneAnalyser);
+
+const webSocketServer = new Ws.Server({ port: 3001 });
+
 PouchDB.plugin(require('pouchdb-find'));
 const farts = new PouchDB('farts');
 farts.createIndex({
@@ -23,6 +27,10 @@ TwitterManagement.initTwitterManagement(farts, uuidv1);
 const observer = Rx.Subscriber.create(
     function (tweet) {
         'use strict';
+        webSocketServer.clients.forEach(function each(client) {
+            client.send(JSON.stringify(tweet, null, 2));
+            console.log('Sent something to the client');
+        });
         analyse(tweet);
     },
     function (error) {
